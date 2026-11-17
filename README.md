@@ -1,4 +1,4 @@
-# 📘 Interview Preparation Assistant: Corrective RAG
+# Interview Preparation Assistant: Corrective RAG
 
 An AI tutor that answers computer science interview questions **grounded in textbooks**, and automatically **falls back to live web search** when the textbooks aren't enough. Built on a **Corrective RAG (CRAG)** pipeline with LangGraph, so every answer is checked for relevance before it is generated.
 
