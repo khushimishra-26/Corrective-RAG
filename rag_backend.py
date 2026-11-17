@@ -14,13 +14,20 @@ from dotenv import load_dotenv
 from typing import TypedDict, List, Literal
 from pydantic import BaseModel, Field
 import regex as re 
+import streamlit as st 
 
 from langchain_community.tools.tavily_search import TavilySearchResults
 
 load_dotenv()
 
+groq_api_key = st.secrets["GROQ_API_KEY"]
+
 #llm model
-llm = ChatGroq(model='openai/gpt-oss-120b')
+llm = ChatGroq(
+    model="openai/gpt-oss-120b",
+    groq_api_key=groq_api_key,
+    temperature=0
+)
 
 #threshold values
 UPPER_TH = 0.7
