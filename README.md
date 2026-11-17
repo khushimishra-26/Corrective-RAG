@@ -7,11 +7,9 @@ An AI tutor that answers computer science interview questions **grounded in text
 ![LangChain](https://img.shields.io/badge/LangChain-RAG-1C3C3C)
 ![Groq](https://img.shields.io/badge/Groq-gpt--oss--120b-F55036)
 
-### 🔗 Live Demo: (https://khushimishra-26-corrective-rag-streamlit-app-q5dqzr.streamlit.app/)
+#### 🔗 Live Demo: (https://khushimishra-26-corrective-rag-streamlit-app-q5dqzr.streamlit.app/)
 
 ---
-
-## ✨ Why this project
 
 Standard RAG retrieves the top-k chunks and sends them to the LLM, whether or not they are relevant. Irrelevant context leads to hallucinated or off-topic answers. This project implements **Corrective RAG**, which adds a *self-check* to the pipeline:
 
@@ -118,8 +116,6 @@ The index is built from standard references across core CS interview topics:
 - Cracking the Coding Interview (Laakmann)
 - Object-Oriented Analysis and Design with Applications (Booch)
 - A Machine Learning e-book
-
-> The PDFs are **not** included in this repository for copyright reasons. Add your own copies to the `docs/` folder (see below).
 
 ---
 
