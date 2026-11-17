@@ -7,7 +7,7 @@ An AI tutor that answers computer science interview questions **grounded in text
 ![LangChain](https://img.shields.io/badge/LangChain-RAG-1C3C3C)
 ![Groq](https://img.shields.io/badge/Groq-gpt--oss--120b-F55036)
 
-### 🔗 Live Demo: [https://YOUR-APP-NAME.streamlit.app](https://YOUR-APP-NAME.streamlit.app)
+### 🔗 Live Demo: (https://khushimishra-26-corrective-rag-streamlit-app-q5dqzr.streamlit.app/)
 
 ---
 
