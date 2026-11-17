@@ -11,3 +11,4 @@ langchain_groq
 pypdf
 streamlit
 langgraph-checkpoint-sqlite
+langchain-tavily

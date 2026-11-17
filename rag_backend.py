@@ -6,12 +6,13 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.vectorstores import FAISS
+from langchain_tavily import TavilySearch
 import sqlite3
 from langgraph.checkpoint.sqlite import SqliteSaver
 
 from dotenv import load_dotenv
 from typing import TypedDict, List, Literal
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import regex as re 
 
 from langchain_community.tools.tavily_search import TavilySearchResults
@@ -25,8 +26,16 @@ llm = ChatGroq(model='openai/gpt-oss-120b')
 UPPER_TH = 0.7
 LOWER_TH = 0.3
 
-# document loader
-docs = PyPDFLoader('/Users/khushimishra/Downloads/(OS) Operating System Concepts (9th Ed) - Gagne, Silberschatz, and Galvin.pdf').load()
+# document loader=
+docs = (
+    PyPDFLoader('docs/(OS) Operating System Concepts (9th Ed) - Gagne, Silberschatz, and Galvin.pdf').load()+
+    PyPDFLoader('docs/computer-networks-tanenbaum-5th-edition.pdf').load()+
+    PyPDFLoader('docs/Fundamentals_of_Database_Systems_6th_Edition-1.pdf').load()+
+    PyPDFLoader('docs/Gayle Laakmann - Cracking the Coding Interview, Fourth Edition_ 150 Programming Interview Questions and Solutions    - libgen.lc.pdf').load()+
+    PyPDFLoader('docs/ml_ebook (1).pdf').load()+
+    PyPDFLoader('docs/Object.Oriented.Analysis.and.Design.with.Applications.3rd.Edition.by.Booch.pdf').load()+
+    PyPDFLoader('docs/Operating Systems - Three Easy Pieces.pdf').load()
+    )
 
 #chunking
 chunks = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100).split_documents(docs)
@@ -132,7 +141,9 @@ def decompose_to_sentences(text: str) -> List[str]:
     return [s.strip() for s in sentences if len(s.strip()) > 20]
 
 class KeepOrDrop(BaseModel):
-    keep: bool
+    keep: bool = Field(
+        description="Whether the sentence is relevant to answering the question"
+    )
 
 # 2.Filter
 filter_prompt = ChatPromptTemplate.from_messages(
@@ -140,8 +151,11 @@ filter_prompt = ChatPromptTemplate.from_messages(
         (
             "system",
             "You are a strict relevance filter.\n"
-            "Return keep=true only if the sentence directly helps answer the question.\n"
-            "Use ONLY the sentence. Output JSON only.",
+            "Determine whether the provided sentence directly helps answer the question.\n"
+            "Return keep=true if the sentence contains relevant information.\n"
+            "Return keep=false if it is irrelevant, unrelated, or does not help answer the question.\n"
+            "Base your decision only on the provided sentence and question.\n"
+            "Do not include explanations."
         ),
         ("human", "Question: {question}\n\nSentence:\n{sentence}"),
     ]
