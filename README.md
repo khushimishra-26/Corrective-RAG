@@ -217,4 +217,4 @@ Yan, S.-Q., Gu, J.-C., Zhu, Y., Ling, Z.-H. (2024). *Corrective Retrieval Augmen
 
 ---
 
-⭐ If you found this project useful, consider giving it a star!
+If you found this project useful, consider giving it a star ⭐️
